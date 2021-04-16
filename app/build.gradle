@@ -8,9 +8,10 @@ android {
         applicationId "com.a10miaomiao.bilimiao"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 42
-        versionName "2.0.3"
+        versionCode 43
+        versionName "2.0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        flavorDimensions "versionCode"
     }
     buildTypes {
         release {
@@ -26,6 +27,25 @@ android {
     }
     androidExtensions {
         experimental = true
+    }
+    productFlavors {
+        coolapk {
+            manifestPlaceholders = [CHANNEL_VALUE: "Coolapk"]
+        }
+        gitee {
+            manifestPlaceholders = [CHANNEL_VALUE: "gitee"]
+        }
+        github {
+            manifestPlaceholders = [CHANNEL_VALUE: "github"]
+        }
+        _10miaomiao {
+            manifestPlaceholders = [CHANNEL_VALUE: "10miaomiao"]
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "bilimiao_${variant.productFlavors[0].name}_v${variant.versionName}.apk"
+        }
     }
 }
 
